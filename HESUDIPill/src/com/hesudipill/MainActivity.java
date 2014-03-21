@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.widget.ExpandableListView;
 import android.widget.TabHost;
@@ -59,6 +60,8 @@ public class MainActivity extends Activity {
         	
         }else{
         	//pošlji na log-in stran
+        	Intent intent = new Intent(this, LoginActivity.class);
+        	startActivity(intent);
         }
         
     }
