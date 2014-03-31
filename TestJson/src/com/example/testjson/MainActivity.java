@@ -27,11 +27,15 @@ public class MainActivity extends Activity {
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 	
 	}
 	
 	//private String naslov="http://www.ehrscape.com:8081/rest/v1/demographics/party/21";
-	private String naslov="http://headers.jsontest.com/";
+	//private String naslov="http://headers.jsontest.com/";
+	
+	 //private String naslov="http://admin:ehrscape123@www.ehrscape.com:8081/rest/v1/demographics/party/21";
+	private String naslov="http://admin:ehrscape123@www.ehrscape.com:8081/rest/v1/session/";
 	
 	public void doStuff(View view){
 		
@@ -51,7 +55,7 @@ public class MainActivity extends Activity {
 			prikaziVsebino(vrste);
 		}
 	}
-	
+ 
 	private List<String>  downloadUrlDomParser(String url)// throws ParserConfigurationException, IOException, SAXException 
 	{
 		List<String> lista = new ArrayList<String>();
@@ -69,20 +73,20 @@ public class MainActivity extends Activity {
         String test = url;
        // lista.add(test);
        
-		try 	//parse thingy
-		{
+		//try 	//parse thingy
+		//{
 			
 			
-			test = json.getString("Host");
-			lista.add(test);
+			//test = json.getString("Host");
+			//lista.add(test);
 			lista.add(json.toString());
 			
-		} 
-		catch (JSONException e) 
-		{
+		//} 
+		//catch (JSONException e) 
+		//{
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
-		}
+		//}
          
         return lista;
 	}
@@ -100,7 +104,7 @@ public class MainActivity extends Activity {
 		TextView tw = (TextView) findViewById(R.id.textView2);
 		TextView tw2 = (TextView) findViewById(R.id.textView1);
 		tw.setText(vrste.get(0));
-		tw2.setText(vrste.get(1));
+		//tw2.setText(vrste.get(1));
 		
 	}
 	
