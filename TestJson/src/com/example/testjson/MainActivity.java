@@ -30,9 +30,12 @@ public class MainActivity extends Activity {
 	
 	}
 	
+	//private String naslov="http://www.ehrscape.com:8081/rest/v1/demographics/party/21";
+	private String naslov="http://headers.jsontest.com/";
+	
 	public void doStuff(View view){
 		
-		new SetData().execute("http://www.ehrscape.com:8081/rest/v1/demographics/party/21");
+		new SetData().execute(naslov);
 	}
 
 	private class SetData extends AsyncTask<String, Void, List<String>> 
@@ -66,12 +69,13 @@ public class MainActivity extends Activity {
         String test = url;
        // lista.add(test);
        
-		/*try 	//parse thingy
+		try 	//parse thingy
 		{
 			
 			
-			test = json.getString("action");
+			test = json.getString("Host");
 			lista.add(test);
+			lista.add(json.toString());
 			
 		} 
 		catch (JSONException e) 
@@ -79,7 +83,7 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
-         */
+         
         return lista;
 	}
 	
@@ -95,9 +99,8 @@ public class MainActivity extends Activity {
 	{
 		TextView tw = (TextView) findViewById(R.id.textView2);
 		TextView tw2 = (TextView) findViewById(R.id.textView1);
-		if(!vrste.isEmpty())
-			tw.setText(vrste.get(0));
-		//tw2.setText(vrste.get(1));
+		tw.setText(vrste.get(0));
+		tw2.setText(vrste.get(1));
 		
 	}
 	
