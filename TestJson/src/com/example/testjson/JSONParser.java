@@ -43,18 +43,19 @@ public class JSONParser
 	            
 	            HttpPost httpPost = new HttpPost(url);
 	            
+	          /*//Add stuff to url request
 	            List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
-	            
 	            pairs.add(new BasicNameValuePair("username", "admin"));
 	            pairs.add(new BasicNameValuePair("password", "ehrscape123"));
-	            
 	            httpPost.setEntity(new UrlEncodedFormEntity(pairs));
-	            
+	            */
 	            HttpResponse httpResponse = httpClient.execute(httpPost);
 	            
 	            //Log.d("URL dodatek", );
 	            
 	            HttpEntity httpEntity = httpResponse.getEntity();
+	           // Log.d("is:", httpEntity.getContentLength()+"");
+	           
 	            is = httpEntity.getContent();           
 	 
 	               
