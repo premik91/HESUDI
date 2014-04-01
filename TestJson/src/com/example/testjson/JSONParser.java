@@ -5,26 +5,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
- 
-
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
+import android.widget.TextView;
 
 public class JSONParser 
 {
@@ -47,13 +42,17 @@ public class JSONParser
 	            DefaultHttpClient httpClient = new DefaultHttpClient();
 	            
 	            HttpPost httpPost = new HttpPost(url);
+	            
 	            List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
 	            
 	            pairs.add(new BasicNameValuePair("username", "admin"));
 	            pairs.add(new BasicNameValuePair("password", "ehrscape123"));
 	            
 	            httpPost.setEntity(new UrlEncodedFormEntity(pairs));
+	            
 	            HttpResponse httpResponse = httpClient.execute(httpPost);
+	            
+	            //Log.d("URL dodatek", );
 	            
 	            HttpEntity httpEntity = httpResponse.getEntity();
 	            is = httpEntity.getContent();           
