@@ -3,11 +3,13 @@ package com.example.testjson;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -37,12 +39,15 @@ public class MainActivity extends Activity {
 	//Tale dela:
 	private String naslov="http://www.ehrscape.com:8081/rest/v1/session/?username=demo&password=demo34";
 	//Bad request:
-	//private String naslov="http://admin:ehrscape123@www.ehrscape.com:8081/rest/v1/session/";
-	
+	//private String naslov="http://www.ehrscape.com:8081/rest/v1/session/";
 	
 	private String naslov2="http://www.ehrscape.com:8081/rest/v1/demographics/party/1/";
 	//private String naslov2;
 	private String sessin;
+	
+	List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
+	
+	
 	public void doStuff(View view){
 		
 		new LoginPost().execute(naslov);
@@ -59,8 +64,44 @@ public class MainActivity extends Activity {
 	{
 		protected List<String> doInBackground(String... args) 
 		{
-			List<String> vrste = parseLogin(args[0]);
-			return vrste;
+			//List<String> vrste = parseLogin(args[0]);
+			String url=args[0];
+			
+			//----------------------
+			List<String> lista = new ArrayList<String>();
+
+	        // Creating JSON Parser instance
+	        JSONParser jParser = new JSONParser();
+	        
+	        // getting JSON string from URL
+	        
+	        JSONObject json = jParser.getJSONFromUrl(url);
+	        
+	        if(json==null){
+	        	lista.add("NULL ODGOVOR");
+	        	return lista;
+	        }
+	        	
+	        String test = url;
+	       
+			try 	//parse thingy
+			{
+				Log.d("Are we here?", "We are!");				
+				test = json.getString("sessionId");
+				lista.add(test);
+				
+				lista.add(json.toString());
+				Log.d("# of elements", lista.size()+"");
+			} 
+			catch (Exception e) 
+			{
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+			}
+	         
+	        return lista;
+			
+			//----------------------
 		}
 
 		protected void onPostExecute(List<String> vrste) 
@@ -69,53 +110,18 @@ public class MainActivity extends Activity {
 		}
 	}
  
-	private List<String>  parseLogin(String url)// throws ParserConfigurationException, IOException, SAXException 
-	{
-		List<String> lista = new ArrayList<String>();
-
-        // Creating JSON Parser instance
-        JSONParser jParser = new JSONParser();
-        
-        // getting JSON string from URL
-        
-        JSONObject json = jParser.getJSONFromUrl(url);
-        
-        if(json==null){
-        	lista.add("NULL ODGOVOR");
-        	return lista;
-        }
-        	
-        String test = url;
-        //lista.add(test);
-       
-		try 	//parse thingy
-		{
-			
-			
-			test = json.getString("sessionId");
-			lista.add(test);
-			
-			lista.add(json.toString());
-			
-		} 
-		catch (Exception e) 
-		{
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		}
-         
-        return lista;
-	}
 	
-	public void loginPost(final List<String> vrste)
+	public void loginPost(final List<String> vrste) //Dobi session iz vrste[0
 	{
 		TextView tw = (TextView) findViewById(R.id.textView2);
 		TextView tw2 = (TextView) findViewById(R.id.textView1);
 		tw.setText(naslov2+"?sessionId="+vrste.get(0));
 		tw2.setText(vrste.get(1));
-		sessin=vrste.get(0);
-		//naslov2=naslov3+"?sessionId="+vrste.get(0);
 		
+		sessin=vrste.get(0);
+        pairs.add(new BasicNameValuePair("sessionId", sessin));
+		
+		//naslov2=naslov3+"?sessionId="+vrste.get(0);
 	}
 	
 	//GET DATA ASYNC THINGY
@@ -124,51 +130,50 @@ public class MainActivity extends Activity {
 	{
 		protected List<String> doInBackground(String... args) 
 		{
-			List<String> vrste = downloadUrlDomParser(args[0]);
-			return vrste;
+			//List<String> vrste = downloadUrlDomParser(args[0]);
+			String url = args[0];
+			//-----------
+			List<String> lista = new ArrayList<String>();
+
+	        // Creating JSON Parser instance
+	        JSONParser jParser = new JSONParser();
+	        
+	        // getting JSON string from URL
+	        
+	        JSONObject json = jParser.getJSONFromUrl(url, sessin);
+	        //JSONObject json = jParser.getJSONFromUrl(url, pairs);
+	        
+	        if(json==null){
+	        	lista.add("NULL ODGOVOR");
+	        	return lista;
+	        }
+	        
+	        String test = url;
+	       // lista.add(test);
+	       
+			try 	//parse thingy
+			{
+				
+				//test = json.getString("Host");
+				//lista.add(test);
+				lista.add(json.toString());
+				
+			} 
+			catch (Exception e) 
+			{
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+			}
+	         
+	        return lista;
+			
+			//-----------
 		}
 
 		protected void onPostExecute(List<String> vrste) 
 		{
 			prikaziVsebino(vrste);
 		}
-	}
- 
-	private List<String>  downloadUrlDomParser(String url)// throws ParserConfigurationException, IOException, SAXException 
-	{
-		List<String> lista = new ArrayList<String>();
-
-        // Creating JSON Parser instance
-        JSONParser2 jParser = new JSONParser2();
-        
-        // getting JSON string from URL
-        
-        JSONObject json = jParser.getJSONFromUrl(url, sessin);
-        
-        if(json==null){
-        	lista.add("NULL ODGOVOR");
-        	return lista;
-        }
-        
-        String test = url;
-       // lista.add(test);
-       
-		//try 	//parse thingy
-		//{
-			
-			
-			//test = json.getString("Host");
-			//lista.add(test);
-			lista.add(json.toString());
-			
-		//} 
-		//catch (JSONException e) 
-		//{
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		//}
-         
-        return lista;
 	}
 	
 	public void prikaziVsebino(final List<String> vrste)
