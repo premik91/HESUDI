@@ -3,7 +3,6 @@ package com.example.testjson;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -41,8 +40,9 @@ public class MainActivity extends Activity {
 	//private String naslov="http://admin:ehrscape123@www.ehrscape.com:8081/rest/v1/session/";
 	
 	
-	private String naslov2="http://www.ehrscape.com:8081/rest/v1/demographics/party/21/";
-	
+	private String naslov2="http://www.ehrscape.com:8081/rest/v1/demographics/party/1/";
+	//private String naslov2;
+	private String sessin;
 	public void doStuff(View view){
 		
 		new LoginPost().execute(naslov);
@@ -94,6 +94,7 @@ public class MainActivity extends Activity {
 			
 			test = json.getString("sessionId");
 			lista.add(test);
+			
 			lista.add(json.toString());
 			
 		} 
@@ -112,8 +113,8 @@ public class MainActivity extends Activity {
 		TextView tw2 = (TextView) findViewById(R.id.textView1);
 		tw.setText(naslov2+"?sessionId="+vrste.get(0));
 		tw2.setText(vrste.get(1));
-		
-		naslov2=naslov2+"?sessionId="+vrste.get(0);
+		sessin=vrste.get(0);
+		//naslov2=naslov3+"?sessionId="+vrste.get(0);
 		
 	}
 	
@@ -138,11 +139,11 @@ public class MainActivity extends Activity {
 		List<String> lista = new ArrayList<String>();
 
         // Creating JSON Parser instance
-        JSONParser jParser = new JSONParser();
+        JSONParser2 jParser = new JSONParser2();
         
         // getting JSON string from URL
         
-        JSONObject json = jParser.getJSONFromUrl(url);
+        JSONObject json = jParser.getJSONFromUrl(url, sessin);
         
         if(json==null){
         	lista.add("NULL ODGOVOR");

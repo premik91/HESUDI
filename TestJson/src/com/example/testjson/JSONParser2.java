@@ -5,30 +5,34 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
 
-public class JSONParser 
+public class JSONParser2 
 {
 	static InputStream is = null;
 	static JSONObject jObj = null;
 	static String json = "";
 
 	// constructor
-	public JSONParser() 
+	public JSONParser2() 
 	{
 
 	}
 
-	public JSONObject getJSONFromUrl(String url) 
+	public JSONObject getJSONFromUrl(String url, String sessin) 
 	 {
 	 
 	     // Making HTTP request
@@ -38,18 +42,21 @@ public class JSONParser
 	            
 	            HttpPost httpPost = new HttpPost(url);
 	            
-	          /*//Add stuff to url request
+	          //Add stuff to url request
 	            List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
-	            pairs.add(new BasicNameValuePair("username", "admin"));
-	            pairs.add(new BasicNameValuePair("password", "ehrscape123"));
+	            pairs.add(new BasicNameValuePair("sessionId", sessin));
+	            
+	            //pairs.add(new BasicNameValuePair("password", "ehrscape123"));
+	            
 	            httpPost.setEntity(new UrlEncodedFormEntity(pairs));
-	            */
+	            
+	            
 	            HttpResponse httpResponse = httpClient.execute(httpPost);
 	            
 	            //Log.d("URL dodatek", );
 	            
 	            HttpEntity httpEntity = httpResponse.getEntity();
-	           // Log.d("is:", httpEntity.getContentLength()+"");
+
 	           
 	            is = httpEntity.getContent();           
 	 
