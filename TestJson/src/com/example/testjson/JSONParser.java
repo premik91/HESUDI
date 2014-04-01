@@ -12,6 +12,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -110,15 +111,20 @@ public class JSONParser
 	            // defaultHttpClient
 	            DefaultHttpClient httpClient = new DefaultHttpClient();
 	            
+	            //HttpGet httpPost = new HttpGet(url);
 	            HttpPost httpPost = new HttpPost(url);
 	            
 	          //Add stuff to url request
-	            List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
-	            pairs.add(new BasicNameValuePair("sessionId", sessin));
+	            //List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
+	            //pairs.add(new BasicNameValuePair("sessionId", sessin));
+	            
+	            httpPost.addHeader("sessionId", sessin);
+	            Log.d("sessionid", sessin);
+	            Log.d("url", url);
 	            
 	            //pairs.add(new BasicNameValuePair("password", "ehrscape123"));
 	            
-	            httpPost.setEntity(new UrlEncodedFormEntity(pairs));
+	            //httpPost.setEntity(new UrlEncodedFormEntity(pairs));
 	            
 	            
 	            HttpResponse httpResponse = httpClient.execute(httpPost);
@@ -129,7 +135,7 @@ public class JSONParser
 
 	           
 	            is = httpEntity.getContent();           
-	 
+
 	               
 
        } catch (UnsupportedEncodingException e) {
@@ -146,8 +152,10 @@ public class JSONParser
 					is, "iso-8859-1"), 8);
 			StringBuilder sb = new StringBuilder();
 			String line = null;
+			
 			while ((line = reader.readLine()) != null) 
-			{
+			{	
+				Log.d("zanka", line);
 				sb.append(line + "\n");
 			}
 			is.close();
