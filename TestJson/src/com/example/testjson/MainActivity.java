@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
 	//Bad request:
 	//private String naslov="http://www.ehrscape.com:8081/rest/v1/session/";
 	
-	private String naslov2="http://www.ehrscape.com:8081/rest/v1/demographics/party/1";
+	private String naslov2="http://www.ehrscape.com:8081/rest/v1/demographics/party/1/";
 	//private String naslov2;
 	private String sessin;
 	
@@ -140,8 +140,8 @@ public class MainActivity extends Activity {
 	        
 	        // getting JSON string from URL
 	        
-	        JSONObject json = jParser.getJSONFromUrl(url, sessin);
-	        //JSONObject json = jParser.getJSONFromUrl(url, pairs);
+	        //JSONObject json = jParser.getJSONFromUrl(url, sessin);
+	        JSONObject json = jParser.getJSONFromUrl(url, pairs);
 	        
 	        if(json==null){
 	        	lista.add("NULL ODGOVOR");

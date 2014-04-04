@@ -10,10 +10,12 @@ import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
@@ -187,19 +189,23 @@ public class JSONParser
 	        try {
 	            // defaultHttpClient
 	            DefaultHttpClient httpClient = new DefaultHttpClient();
-	            
-	            HttpPost httpPost = new HttpPost(url);
-	            
+	            HttpGet httpGet = new HttpGet(url);
+	            httpGet.addHeader(BasicScheme.authenticate(
+	            		 new UsernamePasswordCredentials("admin", "ehrscape123"),
+	            		 "UTF-8", false));
 	          //Add stuff to url request
 	            //List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
 	            //pairs.add(new BasicNameValuePair("sessionId", sessin));
 	            
 	            //pairs.add(new BasicNameValuePair("password", "ehrscape123"));
+	            for (BasicNameValuePair i:pairs){
+	            	httpGet.addHeader(i.getName(), i.getValue());
+	            }
+	            /*
+	            httpGet.setEntity(new UrlEncodedFormEntity(pairs));
+	            */
 	            
-	            httpPost.setEntity(new UrlEncodedFormEntity(pairs));
-	            
-	            
-	            HttpResponse httpResponse = httpClient.execute(httpPost);
+	            HttpResponse httpResponse = httpClient.execute(httpGet);
 	            
 	            //Log.d("URL dodatek", );
 	            
