@@ -1,4 +1,4 @@
-﻿{
+{
 	"Doctor 1":{
 		"name":"",
 		"telephone":"",
@@ -29,7 +29,7 @@
 		"date":"",
 		"comments":"",
 		"therapy":{
-			"2":{
+			"1":{
 				"name":"medicine two",
 				"type":"liquid",
 				"indication":{
@@ -46,6 +46,3 @@
 		}
 	}
 }
-
-
-doctor: telephone, name, diagnosis, date, comments → on extra tab
