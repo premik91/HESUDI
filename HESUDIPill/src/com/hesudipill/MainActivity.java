@@ -65,8 +65,16 @@ public class MainActivity extends Activity {
         }
         
     }
+    private String serverRequest(int uid){
+    	String result1 = '"name":"medicine one","type":"pill","indication":{"morning":1,"before lunch":0,"after lunch":1,"afternoon":0"evening":1},'
+    	String result2 = '"name":"medicine two","type":"liquid","indication":{"morning":0,"before lunch":0,"after lunch":"5 ml","afternoon":0,"evening":0}'
+    	
+    	return '{'+result1+result2+'}';
+    }
 
     private void prepareListData() {
+    	String result = serverRequest(123);
+    	
         listDataHeaderSchedule = new ArrayList<String>();
         listDataChildSchedule = new HashMap<String, List<String>>();
         
