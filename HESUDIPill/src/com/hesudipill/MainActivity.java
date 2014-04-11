@@ -1,8 +1,16 @@
 package com.hesudipill;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;  
+import org.json.simple.parser.ParseException; 
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -65,15 +73,21 @@ public class MainActivity extends Activity {
         }
         
     }
-    private String serverRequest(int uid){
-    	String result1 = '"name":"medicine one","type":"pill","indication":{"morning":1,"before lunch":0,"after lunch":1,"afternoon":0"evening":1},'
-    	String result2 = '"name":"medicine two","type":"liquid","indication":{"morning":0,"before lunch":0,"after lunch":"5 ml","afternoon":0,"evening":0}'
-    	
-    	return '{'+result1+result2+'}';
-    }
 
     private void prepareListData() {
-    	String result = serverRequest(123);
+    	JSONParser parser = new JSONParser();
+    	
+    	  try {  
+    		   Object obj = parser.parse(new FileReader("response.json"));  
+    		   JSONObject jsonObject = (JSONObject) obj; 
+    		  } catch (FileNotFoundException e) {  
+    		   e.printStackTrace();  
+    		  } catch (IOException e) {  
+    		   e.printStackTrace();  
+    		  } catch (ParseException e) {  
+    		   e.printStackTrace();  
+    		  }  
+
     	
         listDataHeaderSchedule = new ArrayList<String>();
         listDataChildSchedule = new HashMap<String, List<String>>();
@@ -81,6 +95,8 @@ public class MainActivity extends Activity {
         listDataHeaderList = new ArrayList<String>();
         listDataChildList = new HashMap<String, List<String>>();
  
+        //TO-DO
+        
         // Adding child data
         listDataHeaderSchedule.add("8:00");
         listDataHeaderSchedule.add("11:00");
