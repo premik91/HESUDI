@@ -10,11 +10,55 @@
 				"name":"medicine one",
 				"type":"pill",
 				"indication":{
-					"morning":1,
-					"before lunch":0,
-					"after lunch":1,
-					"afternoon":0,
-					"evening":1
+					"monday":{
+						"morning":"1",
+						"before lunch":"0",
+						"after lunch":"1",
+						"afternoon":"0",
+						"evening":"1"
+					},
+					"tuesday":{
+						"morning":"1",
+						"before lunch":"0",
+						"after lunch":"1",
+						"afternoon":"0",
+						"evening":"1"
+					},
+					"wednesday":{
+						"morning":"1",
+						"before lunch":"0",
+						"after lunch":"1",
+						"afternoon":"0",
+						"evening":"1"
+					},
+					"thursday":{
+						"morning":"1",
+						"before lunch":"0",
+						"after lunch":"1",
+						"afternoon":"0",
+						"evening":"1"
+					},
+					"friday":{
+						"morning":"1",
+						"before lunch":"0",
+						"after lunch":"1",
+						"afternoon":"0",
+						"evening":"1"
+					},
+					"saturday":{
+						"morning":"1",
+						"before lunch":"0",
+						"after lunch":"1",
+						"afternoon":"0",
+						"evening":"1"
+					},
+					"sunday".{
+						"morning":"1",
+						"before lunch":"0",
+						"after lunch":"1",
+						"afternoon":"0",
+						"evening":"1"
+					}
 				},
 				"from":"2014-04-06",
 				"to":"2014-04-18",
@@ -33,11 +77,55 @@
 				"name":"medicine two",
 				"type":"liquid",
 				"indication":{
-					"morning":0,
-					"before lunch":0,
-					"after lunch":"5 ml",
-					"afternoon":0,
-					"evening":0
+					"monday":{
+						"morning":"",
+						"before lunch":"",
+						"after lunch":"5 ml",
+						"afternoon":"",
+						"evening":""
+					},
+					"tuesday":{
+						"morning":"",
+						"before lunch":"",
+						"after lunch":"5 ml",
+						"afternoon":"",
+						"evening":""
+					},
+					"wednesday":{
+						"morning":"",
+						"before lunch":"",
+						"after lunch":"5 ml",
+						"afternoon":"",
+						"evening":""
+					},
+					"thursday":{
+						"morning":"",
+						"before lunch":"",
+						"after lunch":"5 ml",
+						"afternoon":"",
+						"evening":""
+					},
+					"friday":{
+						"morning":"",
+						"before lunch":"",
+						"after lunch":"5 ml",
+						"afternoon":"",
+						"evening":""
+					},
+					"saturday":{
+						"morning":"",
+						"before lunch":"",
+						"after lunch":"5 ml",
+						"afternoon":"",
+						"evening":""
+					},
+					"sunday".{
+						"morning":"",
+						"before lunch":"",
+						"after lunch":"5 ml",
+						"afternoon":"",
+						"evening":""
+					}
 				},
 				"from":"2014-04-06",
 				"to":"2014-04-18",
